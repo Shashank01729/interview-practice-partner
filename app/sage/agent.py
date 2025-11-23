@@ -12,7 +12,7 @@ from .tools import (
 )
 
 root_agent = Agent(
-    name="interview_practice_partner",
+    name="sage",
     model="gemini-2.0-flash-live-001",
     description="An intelligent interview practice partner that conducts realistic mock interviews with adaptive questioning and constructive feedback.",
     

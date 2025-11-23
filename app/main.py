@@ -22,7 +22,7 @@ from app.sage.agent import root_agent
 #
 
 # Load Gemini API Key
-# load_dotenv()
+load_dotenv()
 
 APP_NAME = "ADK Streaming example"
 session_service = InMemorySessionService()
