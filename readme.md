@@ -1,11 +1,11 @@
-# ADK Voice Agent
+# Interview Practice Partner
 
-This project is a voice agent application using Google's GenAI and FastAPI, designed to simulate a professional job interview experience.
+This project is a voice agent (with chat option) application using Google's GenAI and FastAPI, designed to simulate a professional job interview experience.
 
 ## Approach & Architecture
 
 ### Single Agent, Multiple Tools
-The core of this application is a **Single Agent** architecture that leverages **Multiple Tools** to drive the conversation. The agent, "SAGE" (Strategic Assessment & Growth Expert), is a sophisticated LLM configured with a specific persona and a set of callable tools.
+The core of this application is a **Single Agent** architecture that leverages **Multiple Tools** to drive the conversation. The agent, "SAGE", is a sophisticated LLM configured with a specific persona and a set of callable tools.
 
 -   **Agent Persona**: SAGE acts as a Senior Technical Recruiter with 15+ years of experience.
 -   **Tool-Use Strategy**: Instead of a rigid script, the agent dynamically selects tools based on the conversation context to progress through the interview stages.
