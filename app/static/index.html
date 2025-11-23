@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SAGE</title>
   <script src="/static/js/app.js" type="module"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary-color: #4285F4;
@@ -26,37 +26,40 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--background-color);
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       color: var(--text-color);
       line-height: 1.6;
-      padding: 20px;
-      max-width: 800px;
+      padding: 40px 20px;
+      max-width: 900px;
       margin: 0 auto;
+      min-height: 100vh;
     }
 
     header {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       padding-bottom: 20px;
-      border-bottom: 1px solid var(--gray-light);
+      position: relative;
     }
 
     h1 {
-      font-size: 24px;
-      font-weight: 600;
+      font-size: 32px;
+      font-weight: 700;
       color: var(--primary-color);
       margin-bottom: 8px;
+      letter-spacing: -0.5px;
     }
 
     .subtitle {
-      font-size: 14px;
+      font-size: 16px;
       color: #5F6368;
+      font-weight: 500;
     }
 
     .chat-container {
       background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       overflow: hidden;
       margin-bottom: 20px;
     }
@@ -64,7 +67,7 @@
     #messages {
       height: 400px;
       overflow-y: auto;
-      padding: 20px;
+      padding: 24px;
       background-color: white;
       display: flex;
       flex-direction: column;
@@ -73,10 +76,12 @@
 
     #messages p {
       margin-bottom: 16px;
-      padding: 12px 16px;
-      border-radius: 8px;
+      padding: 14px 18px;
+      border-radius: 12px;
       max-width: 85%;
       word-wrap: break-word;
+      font-size: 15px;
+      line-height: 1.5;
     }
 
     #messages p:last-child {
@@ -86,14 +91,14 @@
     .agent-message {
       background-color: var(--gray-light);
       align-self: flex-start;
-      border-bottom-left-radius: 2px;
+      border-bottom-left-radius: 4px;
       animation: fadeIn 0.3s ease-out;
     }
 
     /* Add a special style for messages that have audio */
     .audio-enabled .agent-message {
       border-left: 3px solid var(--secondary-color);
-      padding-left: 14px;
+      padding-left: 16px;
     }
 
     /* Add a small audio icon for messages with audio */
@@ -114,41 +119,41 @@
       color: white;
       align-self: flex-end;
       margin-left: auto;
-      border-bottom-right-radius: 2px;
+      border-bottom-right-radius: 4px;
       animation: fadeIn 0.3s ease-out;
     }
 
     #messageForm {
       display: flex;
-      gap: 10px;
-      padding: 16px;
+      gap: 12px;
+      padding: 20px;
       background-color: white;
       border-top: 1px solid var(--gray-light);
     }
 
     #message {
       flex: 1;
-      padding: 12px 16px;
-      border: 1px solid var(--gray-medium);
+      padding: 14px 18px;
+      border: 2px solid var(--gray-light);
       border-radius: 24px;
-      font-size: 16px;
+      font-size: 15px;
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     #message:focus {
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.3);
+      box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
     }
 
     button {
-      padding: 12px 20px;
+      padding: 14px 24px;
       border: none;
       border-radius: 24px;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     #sendButton {
@@ -177,35 +182,45 @@
       display: none;
     }
 
+    /* Status indicator - positioned at top right */
     .status-indicator {
+      position: fixed;
+      top: 20px;
+      right: 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-      font-size: 14px;
+      gap: 16px;
+      background: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      font-size: 13px;
       color: #5F6368;
-      gap: 20px;
+      z-index: 1000;
     }
 
     .status-item {
       display: flex;
       align-items: center;
+      gap: 8px;
     }
 
     .status-dot {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background-color: var(--gray-medium);
-      margin-right: 8px;
+      transition: all 0.3s ease;
     }
 
     .status-dot.connected {
       background-color: var(--secondary-color);
+      box-shadow: 0 0 8px rgba(52, 168, 83, 0.4);
     }
 
     .status-dot.recording {
       background-color: var(--accent-color);
+      animation: pulse-recording 1.5s infinite;
     }
 
     .recording-active {
@@ -216,22 +231,32 @@
       0% {
         opacity: 1;
         transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(234, 67, 53, 0.7);
       }
 
       50% {
-        opacity: 0.5;
-        transform: scale(1.2);
+        opacity: 0.8;
+        transform: scale(1.1);
+        box-shadow: 0 0 0 6px rgba(234, 67, 53, 0);
       }
 
       100% {
         opacity: 1;
         transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(234, 67, 53, 0);
       }
     }
 
     @media (max-width: 600px) {
       body {
-        padding: 10px;
+        padding: 20px 10px;
+      }
+
+      .status-indicator {
+        top: 10px;
+        right: 10px;
+        padding: 10px 16px;
+        font-size: 12px;
       }
 
       #messages {
@@ -276,7 +301,7 @@
 
     button:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     button:active:not(:disabled) {
@@ -290,9 +315,9 @@
     /* Add a typing indicator */
     .typing-indicator {
       display: flex;
-      padding: 12px 16px;
+      padding: 14px 18px;
       background-color: var(--gray-light);
-      border-radius: 8px;
+      border-radius: 12px;
       width: fit-content;
       margin-bottom: 16px;
       align-self: flex-start;
@@ -340,6 +365,18 @@
 </head>
 
 <body>
+  <!-- Status indicator at top right -->
+  <div class="status-indicator">
+    <div class="status-item">
+      <div id="status-dot" class="status-dot"></div>
+      <span id="connection-status">Connecting...</span>
+    </div>
+    <div class="status-item" id="recording-container" style="display: none;">
+      <div class="status-dot recording"></div>
+      <span id="recording-status">Recording</span>
+    </div>
+  </div>
+
   <header>
     <h1>SAGE</h1>
     <p class="subtitle">Interview Agent</p>
@@ -360,17 +397,6 @@
       <button type="button" id="startAudioButton">Enable Voice</button>
       <button type="button" id="stopAudioButton">Stop Voice</button>
     </form>
-  </div>
-
-  <div class="status-indicator">
-    <div class="status-item">
-      <div id="status-dot" class="status-dot"></div>
-      <span id="connection-status">Connecting...</span>
-    </div>
-    <div class="status-item" id="recording-container" style="display: none;">
-      <div class="status-dot recording" style="animation: pulse-recording 1.5s infinite;"></div>
-      <span id="recording-status">Recording</span>
-    </div>
   </div>
 </body>
 
