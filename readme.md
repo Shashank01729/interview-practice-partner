@@ -43,7 +43,7 @@ We are planning to evolve the architecture to a **Multi-Agent System** for even 
 -   **Agent-to-Agent (A2A) Communication**:
     -   **Interviewer Agent**: Conducts the interview and asks questions.
     -   **Observer Agent**: Listens to the user's responses in real-time to analyze behavioral traits (e.g., "chatty," "efficient," "nervous") and provides cues to the Interviewer Agent.
-    -   **Monitor Agent**: Oversees the process to ensure goals are met and suggests real-time improvements to the Interviewer Agent.
+    -   **Scoring Agent**: Analyzes the user's responses and provides a score based on the user's performance.
     -   This protocol allows agents to communicate and collaborate behind the scenes to deliver a hyper-personalized experience.
 
 ---
