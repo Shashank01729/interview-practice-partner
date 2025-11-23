@@ -57,7 +57,7 @@ We are planning to evolve the architecture to a **Multi-Agent System** for even 
 1.  **Clone or Download** the repository to your local machine.
 2.  **Navigate** to the project directory in your terminal:
     ```bash
-    cd path/to/adk-voice-agent-main
+    cd interview-practice-partner
     ```
 
 3.  **Create a Virtual Environment** (Recommended):
@@ -89,6 +89,7 @@ pip install -r requirements.txt
 2.  Add your Google Gemini API Key:
     ```env
     GOOGLE_API_KEY=your_api_key_here
+    GOOGLE_GENAI_USE_VERTEXAI=FALSE
     ```
 
 ## Running the Application
