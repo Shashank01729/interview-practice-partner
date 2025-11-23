@@ -2,6 +2,10 @@
 
 This project is a voice agent (with chat option) application using Google's GenAI and FastAPI, designed to simulate a professional job interview experience.
 
+<img width="1910" height="1008" alt="image" src="https://github.com/user-attachments/assets/fb91b721-af63-4813-bfda-f9377ca02cc2" />
+
+---
+
 ## Approach & Architecture
 
 ### Single Agent, Multiple Tools
